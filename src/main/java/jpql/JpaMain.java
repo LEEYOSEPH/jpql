@@ -30,8 +30,10 @@ public class JpaMain {
 
                 em.flush();
                 em.clear();
-            String query = "select m.username, 'hello', true from Member m inner join m.team t" +
-                    "where m.type = jpql.MemberType.USER " ;
+            String query = "select" +
+                                "case when m.age <=10 then '학생요금   " +
+                                "     when m.age >=60 then '성인요금   " +
+                                "     else '일반 요금' end   ";
             List<Object> result = em.createQuery(query)
                                             .getResultList();
 
