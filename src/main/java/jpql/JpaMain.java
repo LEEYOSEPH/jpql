@@ -30,8 +30,9 @@ public class JpaMain {
 
                 em.flush();
                 em.clear();
-            String query = "select (select avg(m1.age) from Member m1) as avgAge from Member m inner join m.team t";
-            List<Member> result = em.createQuery(query, Member.class)
+            String query = "select m.username, 'hello', true from Member m inner join m.team t" +
+                    "where m.type = jpql.MemberType.USER " ;
+            List<Object> result = em.createQuery(query)
                                             .getResultList();
 
             tx.commit();
